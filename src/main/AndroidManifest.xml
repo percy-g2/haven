@@ -44,7 +44,8 @@
         android:fullBackupContent="@xml/backup_config"
         android:supportsRtl="false"
         tools:replace="android:allowBackup,android:supportsRtl"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".ListActivity"
             android:configChanges="orientation|screenSize"
@@ -60,15 +61,14 @@
             android:name=".SettingsActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/settings"
-            android:theme="@style/SettingsTheme"
-            android:windowSoftInputMode="stateHidden" />
+            android:theme="@style/SettingsTheme" />
         <activity
             android:name=".ui.PPAppIntro"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="fullUser" />
         <activity
             android:name=".MonitorActivity"
             android:label="@string/app_name"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="fullUser"
             android:launchMode="singleTop"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
@@ -114,7 +114,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity
             android:name=".ui.CameraConfigureActivity"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="fullUser"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <receiver android:name=".sensors.PowerConnectionReceiver">

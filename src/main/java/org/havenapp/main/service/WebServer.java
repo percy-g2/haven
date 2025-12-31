@@ -180,7 +180,7 @@ public class WebServer extends NanoHTTPD {
         {
             String title = eventTrigger.getStringType(new ResourceManager(mContext));
             String desc = new SimpleDateFormat(Utils.DATE_TIME_PATTERN,
-                    Locale.getDefault()).format(eventTrigger.getTime().toString());
+                    Locale.getDefault()).format(eventTrigger.getTime());
 
             page.append("<b>");
             page.append(title).append("</b><br/>");
@@ -199,9 +199,10 @@ public class WebServer extends NanoHTTPD {
                 page.append("<audio src=\"").append(mediaPath).append("\"></audio>");
                 page.append("<a href=\"").append(mediaPath).append("\">Download Media").append("</a>");
 
+            } else if (eventTrigger.getType() == EventTrigger.CAMERA_VIDEO) {
+                page.append("<video src=\"").append(mediaPath).append("\"></video>");
+                page.append("<a href=\"").append(mediaPath).append("\">Download Media").append("</a>");
             }
-
-
             page.append("<hr/>");
         }
 
@@ -239,6 +240,9 @@ public class WebServer extends NanoHTTPD {
             case EventTrigger.MICROPHONE:
                 sType = "audio/mp4";
                 break;
+            case EventTrigger.CAMERA_VIDEO:
+                sType = "video/*";
+                break;
             default:
                 sType = null;
         }
@@ -253,7 +257,7 @@ public class WebServer extends NanoHTTPD {
         return MessageDigest.isEqual(aByteArray, bByteArray);
     }
 
-    class OnionCookie extends Cookie
+    static class OnionCookie extends Cookie
     {
 
         public OnionCookie(String name, String value, int numDays) {
