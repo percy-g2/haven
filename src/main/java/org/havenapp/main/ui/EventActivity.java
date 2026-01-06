@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -214,10 +215,13 @@ public class EventActivity extends AppCompatActivity implements EventTriggerAdap
 //        setTitle("Event @ " + mEvent.getStartTime().toLocaleString());
 
         for (EventTrigger eventTrigger : eventTriggerList) {
-
-            mEventLog.append("Event Triggered @ ").append(
-                     new SimpleDateFormat(Utils.DATE_TIME_PATTERN,
-                            Locale.getDefault()).format(eventTrigger.getTime().toString())).append("\n");
+            Date triggerTime = eventTrigger.getTime();
+            String timeString = triggerTime != null 
+                    ? new SimpleDateFormat(Utils.DATE_TIME_PATTERN,
+                            Locale.getDefault()).format(triggerTime)
+                    : "Unknown";
+            
+            mEventLog.append("Event Triggered @ ").append(timeString).append("\n");
 
             String sType = eventTrigger.getStringType(resourceManager);
 
